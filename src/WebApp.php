@@ -1945,10 +1945,36 @@ class WebApp
             $this->app->view()->set('pagination', false);
 
         } elseif ($this->stores[$this->store]->isPaginated()) {
+
+            $current_page = $this->stores[$this->store]->getCurrentPage();
             // add pagination buttons to the template
-            $this->app->view()->set('currentPage', $this->stores[$this->store]->getCurrentPage());
+            $this->app->view()->set('currentPage', $current_page);
             // $this->app->view()->set('numResults', count($data));
-            $this->app->view()->set('maxPageNum', (int) ceil($this->stores[$this->store]->getMaxResults() / $this->appOptions['num_per_page']));
+            $max_page_num = (int) ceil($this->stores[$this->store]->getMaxResults() / $this->appOptions['num_per_page']);
+            $this->app->view()->set('maxPageNum', $max_page_num);
+
+            // // build pages array
+            // $pages = [];
+            // if (!isset($this->appOptions['num_page_links'])) {
+            //     $num_page_links = 5;
+            // } else {
+            //     $num_page_links = intval($this->appOptions['num_page_links']);
+            // }
+            // $pcounter = 0;
+            // $p = $current_page;
+            // while ($pcounter < $num_page_links) {
+            //     $page = $p - intval($num_page_links / 2);
+            //     if ($page > 0) {
+            //         $pcounter++;
+            //         $pages[] = $page;
+            //     }
+            //     $p++;
+            //     // if ($p > $max_page_num) {
+            //     //     break;
+            //     // }
+            // }
+            // $this->app->view()->set('pages', $pages);
+
         }
 
 
