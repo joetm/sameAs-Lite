@@ -1,7 +1,7 @@
 
 <div class="pagination">
-  {# for i in pages #}
-  {% for i in 1..maxPageNum %}
+  {# for i in 1..maxPageNum #}
+  {% for i in pages %}
       <a href="?page={{ i }}" class="label page{% if i == currentPage %} current{% endif %}">{{ i }}</a>
   {% endfor %} 
 </div>

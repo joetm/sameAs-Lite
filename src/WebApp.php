@@ -1954,26 +1954,26 @@ class WebApp
             $this->app->view()->set('maxPageNum', $max_page_num);
 
             // // build pages array
-            // $pages = [];
-            // if (!isset($this->appOptions['num_page_links'])) {
-            //     $num_page_links = 5;
-            // } else {
-            //     $num_page_links = intval($this->appOptions['num_page_links']);
-            // }
-            // $pcounter = 0;
-            // $p = $current_page;
-            // while ($pcounter < $num_page_links) {
-            //     $page = $p - intval($num_page_links / 2);
-            //     if ($page > 0) {
-            //         $pcounter++;
-            //         $pages[] = $page;
-            //     }
-            //     $p++;
-            //     // if ($p > $max_page_num) {
-            //     //     break;
-            //     // }
-            // }
-            // $this->app->view()->set('pages', $pages);
+            $pages = [];
+            if (!isset($this->appOptions['num_page_links'])) {
+                $num_page_links = 5;
+            } else {
+                $num_page_links = intval($this->appOptions['num_page_links']);
+            }
+            $pcounter = 0;
+            $p = $current_page;
+            while ($pcounter < $num_page_links) {
+                $page = $p - ceil($num_page_links / 2);
+                if ($page > 0) {
+                    $pages[] = $page;
+                    $pcounter++;
+                }
+                $p++;
+                if ($page >= $max_page_num) {
+                    break;
+                }
+            }
+            $this->app->view()->set('pages', $pages);
 
         }
 
